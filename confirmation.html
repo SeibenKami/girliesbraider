@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed | The Girlies Braider</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#testimonials">Reviews</a></li>
+    </ul>
+
+    <a href="index.html" class="nav-logo">The Girlies <span>Braider</span></a>
+
+    <div class="nav-cta">
+      <a href="booking.html" class="btn-book">Book Now</a>
+    </div>
+
+    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Confirmation -->
+  <section class="confirmation">
+    <div class="confirmation-card fade-in-up">
+      <div class="confirmation-icon">✓</div>
+
+      <h1>Booking Received!</h1>
+      <p>Your appointment has been created. Please make payment within <strong>24 hours</strong> to secure your slot.</p>
+
+      <!-- Payment Instructions -->
+      <div class="payment-box">
+        <h3>Mobile Money Payment</h3>
+        <div class="payment-detail">
+          <span class="label">Network</span>
+          <span class="value">MTN Mobile Money</span>
+        </div>
+        <div class="payment-detail">
+          <span class="label">Number</span>
+          <span class="value">024 000 0000</span>
+        </div>
+        <div class="payment-detail">
+          <span class="label">Name</span>
+          <span class="value">The Girlies Braider</span>
+        </div>
+        <div class="payment-detail">
+          <span class="label">Reference</span>
+          <span class="value" id="paymentRef">—</span>
+        </div>
+        <div class="payment-detail highlight">
+          <span class="label">Amount to Pay</span>
+          <span class="value" id="paymentAmount">—</span>
+        </div>
+      </div>
+
+      <div class="payment-warning">
+        <span class="warning-icon">⏱</span>
+        <span>
+          Please complete your Mobile Money payment within <strong>24 hours</strong>.
+          Use your booking reference as the payment reference.
+          Your booking will be cancelled if payment is not received in time.
+        </span>
+      </div>
+
+      <!-- Booking Details -->
+      <div class="confirmation-details">
+        <h4>Your Booking Details</h4>
+        <div class="detail-row">
+          <span class="label">Name</span>
+          <span id="detailName">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Phone</span>
+          <span id="detailPhone">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Style</span>
+          <span id="detailStyle">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Date</span>
+          <span id="detailDate">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Time</span>
+          <span id="detailTime">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Duration</span>
+          <span id="detailDuration">—</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <a href="index.html" class="btn-primary">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="public/js/main.js"></script>
+  <script src="public/js/confirmation.js"></script>
+</body>
+</html>

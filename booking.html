@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book an Appointment | The Girlies Braider</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#testimonials">Reviews</a></li>
+    </ul>
+
+    <a href="index.html" class="nav-logo">The Girlies <span>Braider</span></a>
+
+    <div class="nav-cta">
+      <a href="booking.html" class="btn-book">Book Now</a>
+    </div>
+
+    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 class="section-title">Book Your Appointment</h1>
+    <p>Choose your style, pick a date, and you're all set.</p>
+  </div>
+
+  <!-- Booking Section -->
+  <section class="booking-section">
+
+    <!-- Steps Indicator -->
+    <div class="booking-steps">
+      <div class="step active" id="step-indicator-1">
+        <span class="step-number">1</span>
+        Choose Style
+      </div>
+      <div class="step-connector" id="connector-1"></div>
+      <div class="step" id="step-indicator-2">
+        <span class="step-number">2</span>
+        Pick a Date
+      </div>
+      <div class="step-connector" id="connector-2"></div>
+      <div class="step" id="step-indicator-3">
+        <span class="step-number">3</span>
+        Your Details
+      </div>
+    </div>
+
+    <!-- Step 1: Choose Style -->
+    <div class="step-panel active" id="step-1">
+      <div class="styles-grid" id="stylesGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="booking-nav">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <button class="btn-next" id="btnToStep2" disabled onclick="goToStep(2)">
+          Continue →
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Pick a Date & Time -->
+    <div class="step-panel" id="step-2">
+      <div class="booking-form">
+        <div class="form-group">
+          <label>Select a Date</label>
+          <div class="date-grid" id="dateGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Select a Time</label>
+          <div class="time-grid" id="timeGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(1)">← Back</button>
+        <button class="btn-next" id="btnToStep3" disabled onclick="goToStep(3)">
+          Continue →
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Your Details & Confirm -->
+    <div class="step-panel" id="step-3">
+      <div class="booking-form">
+        <div class="form-group">
+          <label for="customerName">Your Full Name</label>
+          <input type="text" id="customerName" placeholder="e.g. Ama Mensah" oninput="validateDetails()">
+        </div>
+
+        <div class="form-group">
+          <label for="customerPhone">Phone Number</label>
+          <input type="tel" id="customerPhone" placeholder="e.g. 024 000 0000" oninput="validateDetails()">
+          <span class="phone-error" id="phoneError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="customerNotes">Special Requests (optional)</label>
+          <textarea id="customerNotes" placeholder="e.g. I want waist-length braids, color 33..."></textarea>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="booking-summary" id="bookingSummary">
+          <h3>Booking Summary</h3>
+          <div class="summary-row">
+            <span class="label">Style</span>
+            <span id="summaryStyle">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Date</span>
+            <span id="summaryDate">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Time</span>
+            <span id="summaryTime">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Duration</span>
+            <span id="summaryDuration">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Total</span>
+            <span id="summaryTotal">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(2)">← Back</button>
+        <button class="btn-next" id="btnConfirm" disabled onclick="confirmBooking()">
+          Confirm Booking →
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Girlies Braider. All rights reserved.</span>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TK</a>
+        <a href="#" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="public/js/main.js"></script>
+  <script src="public/js/booking.js"></script>
+</body>
+</html>

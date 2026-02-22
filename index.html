@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Girlies Braider | Braids & Hairstyling</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+
+    <a href="index.html" class="nav-logo">The Girlies <span>Braider</span></a>
+
+    <div class="nav-cta">
+      <a href="booking.html" class="btn-book">Book Now</a>
+    </div>
+
+    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-location fade-in-up">KNUST- Kumasi, Ghana</div>
+      <h1 class="hero-title fade-in-up fade-in-up-delay-1">
+        All for the sake of your <span class="accent">beauty</span>
+      </h1>
+      <div class="hero-actions fade-in-up fade-in-up-delay-2">
+        <a href="booking.html" class="btn-primary">Book Now</a>
+        <a href="#services" class="btn-secondary">
+          <span class="play-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </span>
+          See our styles
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image fade-in-up fade-in-up-delay-3">
+      <div class="hero-image-wrapper">
+        <div class="hero-arch"></div>
+        <img src="public/main.jpg" alt="Beautiful braided hairstyle" class="hero-photo">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div>
+      <span class="section-number">01/</span>
+      <h2 class="section-title">About Us</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          The Girlies Braider is your go-to destination for stunning braids and
+          protective hairstyles in KNUST- Kumasi. With years of experience and a passion
+          for hair artistry, we create styles that make you look and feel your best.
+        </p>
+        <p>
+          From classic box braids to intricate goddess locs, every style is crafted with
+          care and precision. We believe every woman deserves to walk out feeling like a queen.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Braid Styles</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9</div>
+          <div class="stat-label">Star Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Preview -->
+  <section class="services-preview" id="services">
+    <div class="services-header">
+      <div>
+        <span class="section-number">02/</span>
+        <h2 class="section-title">Our Styles</h2>
+      </div>
+      <a href="booking.html" class="btn-outline">View All & Book →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" onclick="location.href='booking.html'">
+        <div class="service-card-image">
+          <img src="public/b1.jpg" alt="Fulani Braids" class="service-card-img">
+        </div>
+        <div class="service-card-body">
+          <h3>Fulani Braids</h3>
+          <div class="price">GH₵ 300</div>
+          <div class="duration">3-4 hours</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="location.href='booking.html'">
+        <div class="service-card-image">
+          <img src="public/b2.jpg" alt="Tribal Braids" class="service-card-img">
+        </div>
+        <div class="service-card-body">
+          <h3>Tribal Braids</h3>
+          <div class="price">GH₵ 320</div>
+          <div class="duration">3-4 hours</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="location.href='booking.html'">
+        <div class="service-card-image">
+          <img src="public/b3.jpg" alt="Goddess Locs" class="service-card-img">
+        </div>
+        <div class="service-card-body">
+          <h3>Goddess Locs</h3>
+          <div class="price">GH₵ 400</div>
+          <div class="duration">5-6 hours</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="location.href='booking.html'">
+        <div class="service-card-image">
+          <img src="public/b4.jpg" alt="Braided Updo" class="service-card-img">
+        </div>
+        <div class="service-card-body">
+          <h3>Braided Updo</h3>
+          <div class="price">GH₵ 350</div>
+          <div class="duration">3-4 hours</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <span class="section-number">03/</span>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "The best braider in KNUST- Kumasi! My knotless braids lasted 8 weeks and I got
+          compliments everywhere I went. Definitely booking again."
+        </p>
+        <div class="testimonial-author">— Ama K.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "So gentle with my edges! She really takes her time and the result is
+          always beautiful. My goddess locs were absolutely stunning."
+        </p>
+        <div class="testimonial-author">— Efua M.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "I drove all the way from Tema just for her cornrows. Worth every
+          minute of the trip. Clean, neat, and exactly what I asked for."
+        </p>
+        <div class="testimonial-author">— Nana A.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <span class="section-number">04/</span>
+    <h2 class="section-title">Ready for Your New Look?</h2>
+    <p>Book your appointment today and let us bring your dream hairstyle to life.</p>
+    <a href="booking.html" class="btn-primary">Book Your Appointment</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">The Girlies <span>Braider</span></div>
+        <p>Your go-to braids and hairstyling studio in KNUST- Kumasi. Making every woman feel like a queen, one braid at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="booking.html">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="booking.html">Box Braids</a></li>
+          <li><a href="booking.html">Knotless Braids</a></li>
+          <li><a href="booking.html">Cornrows</a></li>
+          <li><a href="booking.html">Goddess Locs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">KNUST- Kumasi, Ghana</a></li>
+          <li><a href="tel:+233000000000">+233 00 000 0000</a></li>
+          <li><a href="#">@thegirliesbraider</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Girlies Braider. All rights reserved.</span>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TK</a>
+        <a href="#" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="public/js/main.js"></script>
+</body>
+</html>
