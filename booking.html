@@ -241,10 +241,28 @@
       layout: window.innerWidth <= 768 ? "column_view" : "month_view",
     });
 
-    // When Cal.com booking completes, advance to confirmation
+    // When Cal.com booking completes, dismiss modal and advance to confirmation
     Cal("on", {
       action: "bookingSuccessful",
       callback: function () {
+        // Find and remove Cal.com's popup modal (fixed-position overlay with iframe)
+        document.querySelectorAll("iframe").forEach(function (iframe) {
+          try {
+            if (iframe.src && iframe.src.indexOf("cal.com") !== -1) {
+              // Walk up to find the fixed overlay wrapper
+              var el = iframe;
+              while (el && el !== document.body) {
+                var style = window.getComputedStyle(el);
+                if (style.position === "fixed" && parseFloat(style.zIndex) > 999) {
+                  el.remove();
+                  return;
+                }
+                el = el.parentElement;
+              }
+            }
+          } catch (e) {}
+        });
+
         showConfirmation();
       },
     });
