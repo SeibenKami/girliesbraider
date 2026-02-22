@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Book an Appointment | The Girlies Braider</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -89,8 +89,25 @@
 
     <!-- Step 3: Pick a Date & Time (Cal.com) -->
     <div class="step-panel" id="step-3">
-      <div class="cal-embed-container">
+      <!-- Desktop: inline embed -->
+      <div class="cal-embed-container cal-desktop-only">
         <div id="my-cal-inline"></div>
+      </div>
+
+      <!-- Mobile: popup trigger -->
+      <div class="cal-mobile-only">
+        <p style="text-align:center; color: var(--color-text-light); margin-bottom: 1.5rem;">
+          Tap the button below to choose your preferred date and time.
+        </p>
+        <button
+          id="calMobileBtn"
+          data-cal-link="frank-adu-zt1m3p"
+          data-cal-config='{"layout":"column_view"}'
+          class="btn-primary"
+          style="display:block; width:100%; text-align:center;"
+        >
+          Select Date &amp; Time
+        </button>
       </div>
 
       <div class="booking-nav">
@@ -104,7 +121,7 @@
         <div class="confirmation-icon">&#10003;</div>
 
         <h1>Booking Received!</h1>
-        <p>Your appointment has been created. Please make a deposit payment within <strong>24 hours</strong> to secure your slot.</p>
+        <p>Your appointment has been created. Please make a payment of <strong>GHS 50</strong> within <strong>24 hours</strong> to secure your slot.</p>
 
         <!-- Payment Instructions -->
         <div class="payment-box">
@@ -126,8 +143,8 @@
             <span class="value" id="paymentRef">&mdash;</span>
           </div>
           <div class="payment-detail highlight">
-            <span class="label">Deposit Amount</span>
-            <span class="value" id="paymentAmount">&mdash;</span>
+            <span class="label">Amount to Pay</span>
+            <span class="value">GHS 50</span>
           </div>
         </div>
 
@@ -221,7 +238,7 @@
     Cal("ui", {
       styles: { branding: { brandColor: "#1a1a1a" } },
       hideEventTypeDetails: false,
-      layout: "month_view",
+      layout: window.innerWidth <= 768 ? "column_view" : "month_view",
     });
 
     // When Cal.com booking completes, advance to confirmation

@@ -118,19 +118,30 @@ function loadCalEmbed() {
   var name = document.getElementById('customerName').value.trim();
   var phone = document.getElementById('customerPhone').value.trim();
   var styleName = selectedStyle ? selectedStyle.name : '';
+  var notesText = "Style: " + styleName + "\nPhone: " + phone;
+  var isMobile = window.innerWidth <= 768;
 
-  // Clear previous embed so it re-renders with fresh prefill data
-  document.getElementById('my-cal-inline').innerHTML = '';
-
-  Cal("inline", {
-    calLink: "frank-adu-zt1m3p",
-    elementOrSelector: "#my-cal-inline",
-    config: {
-      layout: "month_view",
+  if (isMobile) {
+    // Mobile: update the popup trigger button with prefilled data
+    var btn = document.getElementById('calMobileBtn');
+    btn.setAttribute('data-cal-config', JSON.stringify({
+      layout: "column_view",
       name: name,
-      notes: "Style: " + styleName + "\nPhone: " + phone,
-    },
-  });
+      notes: notesText,
+    }));
+  } else {
+    // Desktop: render inline embed
+    document.getElementById('my-cal-inline').innerHTML = '';
+    Cal("inline", {
+      calLink: "frank-adu-zt1m3p",
+      elementOrSelector: "#my-cal-inline",
+      config: {
+        layout: "month_view",
+        name: name,
+        notes: notesText,
+      },
+    });
+  }
 }
 
 // ===== CONFIRMATION =====
@@ -162,8 +173,6 @@ function showConfirmation() {
     document.getElementById('detailStyle').textContent = selectedStyle.name;
     document.getElementById('detailPrice').textContent = 'GH\u20B5 ' + selectedStyle.price;
     document.getElementById('detailDuration').textContent = selectedStyle.duration;
-    var deposit = Math.round(selectedStyle.price * 0.5);
-    document.getElementById('paymentAmount').textContent = 'GH\u20B5 ' + deposit;
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
