@@ -817,6 +817,12 @@ img {
   color: var(--color-text);
 }
 
+.cal-embed-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 500px;
+}
+
 .phone-error {
   display: none;
   color: #d32f2f;
@@ -1264,15 +1270,6 @@ img {
 
   .booking-section {
     padding: 2rem 1.5rem 4rem;
-  }
-
-  .booking-steps {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .step-connector {
-    display: none;
   }
 
   .styles-grid {

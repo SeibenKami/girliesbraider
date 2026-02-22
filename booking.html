@@ -48,12 +48,12 @@
       <div class="step-connector" id="connector-1"></div>
       <div class="step" id="step-indicator-2">
         <span class="step-number">2</span>
-        Pick a Date
+        Your Details
       </div>
       <div class="step-connector" id="connector-2"></div>
       <div class="step" id="step-indicator-3">
         <span class="step-number">3</span>
-        Your Details
+        Pick a Date
       </div>
     </div>
 
@@ -62,43 +62,10 @@
       <div class="styles-grid" id="stylesGrid">
         <!-- Rendered by JS -->
       </div>
-
-      <div class="booking-nav">
-        <a href="index.html" class="btn-back">← Back to Home</a>
-        <button class="btn-next" id="btnToStep2" disabled onclick="goToStep(2)">
-          Continue →
-        </button>
-      </div>
     </div>
 
-    <!-- Step 2: Pick a Date & Time -->
+    <!-- Step 2: Your Details -->
     <div class="step-panel" id="step-2">
-      <div class="booking-form">
-        <div class="form-group">
-          <label>Select a Date</label>
-          <div class="date-grid" id="dateGrid">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Select a Time</label>
-          <div class="time-grid" id="timeGrid">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </div>
-
-      <div class="booking-nav">
-        <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-next" id="btnToStep3" disabled onclick="goToStep(3)">
-          Continue →
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 3: Your Details & Confirm -->
-    <div class="step-panel" id="step-3">
       <div class="booking-form">
         <div class="form-group">
           <label for="customerName">Your Full Name</label>
@@ -110,43 +77,97 @@
           <input type="tel" id="customerPhone" placeholder="e.g. 024 000 0000" oninput="validateDetails()">
           <span class="phone-error" id="phoneError"></span>
         </div>
-
-        <div class="form-group">
-          <label for="customerNotes">Special Requests (optional)</label>
-          <textarea id="customerNotes" placeholder="e.g. I want waist-length braids, color 33..."></textarea>
-        </div>
-
-        <!-- Booking Summary -->
-        <div class="booking-summary" id="bookingSummary">
-          <h3>Booking Summary</h3>
-          <div class="summary-row">
-            <span class="label">Style</span>
-            <span id="summaryStyle">—</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Date</span>
-            <span id="summaryDate">—</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Time</span>
-            <span id="summaryTime">—</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Duration</span>
-            <span id="summaryDuration">—</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Total</span>
-            <span id="summaryTotal">—</span>
-          </div>
-        </div>
       </div>
 
       <div class="booking-nav">
-        <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-next" id="btnConfirm" disabled onclick="confirmBooking()">
-          Confirm Booking →
+        <button class="btn-back" onclick="goToStep(1)">&#8592; Back</button>
+        <button class="btn-next" id="btnToStep3" disabled onclick="goToStep(3)">
+          Continue &#8594;
         </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Pick a Date & Time (Cal.com) -->
+    <div class="step-panel" id="step-3">
+      <div class="cal-embed-container">
+        <div id="my-cal-inline"></div>
+      </div>
+
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(2)">&#8592; Back</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirmation & Deposit (hidden from step indicators) -->
+    <div class="step-panel" id="step-4">
+      <div class="confirmation-card" style="margin: 0 auto;">
+        <div class="confirmation-icon">&#10003;</div>
+
+        <h1>Booking Received!</h1>
+        <p>Your appointment has been created. Please make a deposit payment within <strong>24 hours</strong> to secure your slot.</p>
+
+        <!-- Payment Instructions -->
+        <div class="payment-box">
+          <h3>Mobile Money Deposit</h3>
+          <div class="payment-detail">
+            <span class="label">Network</span>
+            <span class="value">MTN Mobile Money</span>
+          </div>
+          <div class="payment-detail">
+            <span class="label">Number</span>
+            <span class="value">024 000 0000</span>
+          </div>
+          <div class="payment-detail">
+            <span class="label">Name</span>
+            <span class="value">The Girlies Braider</span>
+          </div>
+          <div class="payment-detail">
+            <span class="label">Reference</span>
+            <span class="value" id="paymentRef">&mdash;</span>
+          </div>
+          <div class="payment-detail highlight">
+            <span class="label">Deposit Amount</span>
+            <span class="value" id="paymentAmount">&mdash;</span>
+          </div>
+        </div>
+
+        <div class="payment-warning">
+          <span class="warning-icon">&#9201;</span>
+          <span>
+            Please complete your Mobile Money deposit within <strong>24 hours</strong>.
+            Use your booking reference as the payment reference.
+            Your booking will be cancelled if payment is not received in time.
+          </span>
+        </div>
+
+        <!-- Booking Details -->
+        <div class="confirmation-details">
+          <h4>Your Booking Details</h4>
+          <div class="detail-row">
+            <span class="label">Name</span>
+            <span id="detailName">&mdash;</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Phone</span>
+            <span id="detailPhone">&mdash;</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Style</span>
+            <span id="detailStyle">&mdash;</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Price</span>
+            <span id="detailPrice">&mdash;</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Duration</span>
+            <span id="detailDuration">&mdash;</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <a href="index.html" class="btn-primary">Back to Home</a>
+        </div>
       </div>
     </div>
 
@@ -163,6 +184,54 @@
       </div>
     </div>
   </footer>
+
+  <!-- Cal.com embed loader (load script only, don't render yet) -->
+  <script type="text/javascript">
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    Cal("init", { origin: "https://cal.com" });
+
+    Cal("ui", {
+      styles: { branding: { brandColor: "#1a1a1a" } },
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
+
+    // When Cal.com booking completes, advance to confirmation
+    Cal("on", {
+      action: "bookingSuccessful",
+      callback: function () {
+        showConfirmation();
+      },
+    });
+  </script>
 
   <script src="public/js/main.js"></script>
   <script src="public/js/booking.js"></script>

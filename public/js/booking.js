@@ -8,7 +8,7 @@ const hairstyles = [
   { id: 6, name: 'Passion Twists', price: 280, duration: '3-4 hours', desc: 'Soft, romantic two-strand twists with a natural textured finish.', img: 'public/b3.jpg' },
   { id: 7, name: 'Feed-in Braids', price: 200, duration: '2-3 hours', desc: 'Sleek braids that start thin and gradually thicken. Great for updos.', img: 'public/b1.jpg' },
   { id: 8, name: 'Twist Braids', price: 220, duration: '2-3 hours', desc: 'Classic two-strand twists for a clean and versatile protective style.', img: 'public/b3.jpg' },
-  { id: 9, name: 'Lemonade Braids', price: 280, duration: '3-4 hours', desc: 'Side-swept cornrows inspired by Beyoncé. Bold and iconic.', img: 'public/b2.jpg' },
+  { id: 9, name: 'Lemonade Braids', price: 280, duration: '3-4 hours', desc: 'Side-swept cornrows inspired by Beyonc\u00e9. Bold and iconic.', img: 'public/b2.jpg' },
   { id: 10, name: 'Butterfly Locs', price: 350, duration: '4-5 hours', desc: 'Distressed faux locs with a looped, bohemian texture.', img: 'public/b4.jpg' },
   { id: 11, name: 'Tribal Braids', price: 320, duration: '3-4 hours', desc: 'Bold braids with intricate patterns and creative partings.', img: 'public/b2.jpg' },
   { id: 12, name: 'Crochet Braids', price: 180, duration: '1-2 hours', desc: 'Quick-install braids using the crochet method. Many textures available.', img: 'public/b4.jpg' },
@@ -29,156 +29,46 @@ const gradients = [
   'linear-gradient(135deg, #f0e0d0, #dcc5b5)',
 ];
 
-const timeSlots = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
-
 // ===== STATE =====
 let selectedStyle = null;
-let selectedDate = null;
-let selectedTime = null;
-let selectedDateDisplay = '';
 
 // ===== RENDER STYLES =====
 function renderStyles() {
   const grid = document.getElementById('stylesGrid');
-  grid.innerHTML = hairstyles.map((style, i) => `
-    <div class="style-card ${selectedStyle && selectedStyle.id === style.id ? 'selected' : ''}"
-         onclick="selectStyle(${style.id})">
-      <div class="style-card-image" style="background: ${gradients[i % gradients.length]}">
-        <img src="${style.img}" alt="${style.name}" class="style-card-img">
-      </div>
-      <div class="style-card-body">
-        <h3>${style.name}</h3>
-        <div class="style-price">GH₵ ${style.price}</div>
-        <div class="style-duration">${style.duration}</div>
-        <div class="style-desc">${style.desc}</div>
-        ${selectedStyle && selectedStyle.id === style.id ? `<button class="btn-card-continue" onclick="event.stopPropagation(); goToStep(2)">Continue →</button>` : ''}
-      </div>
-    </div>
-  `).join('');
-}
-
-function selectStyle(id) {
-  selectedStyle = hairstyles.find(s => s.id === id);
-  renderStyles();
-  document.getElementById('btnToStep2').disabled = false;
-}
-
-// ===== RENDER DATES =====
-function renderDates() {
-  const grid = document.getElementById('dateGrid');
-  const dates = [];
-  const today = new Date();
-
-  for (let i = 1; i <= 14; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    // Skip Sundays
-    if (d.getDay() === 0) continue;
-    dates.push(d);
-  }
-
-  grid.innerHTML = dates.slice(0, 10).map(d => {
-    const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
-    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const key = d.toISOString().split('T')[0];
-    return `
-      <div class="date-slot ${selectedDate === key ? 'selected' : ''}"
-           onclick="selectDate('${key}', '${dayName}, ${dateStr}')">
-        <div class="date-day">${dayName}</div>
-        <div class="date-date">${dateStr}</div>
-      </div>
-    `;
+  grid.innerHTML = hairstyles.map(function (style, i) {
+    var isSelected = selectedStyle && selectedStyle.id === style.id;
+    return '<div class="style-card ' + (isSelected ? 'selected' : '') + '"' +
+      ' onclick="selectStyle(' + style.id + ')">' +
+      '<div class="style-card-image" style="background: ' + gradients[i % gradients.length] + '">' +
+        '<img src="' + style.img + '" alt="' + style.name + '" class="style-card-img">' +
+      '</div>' +
+      '<div class="style-card-body">' +
+        '<h3>' + style.name + '</h3>' +
+        '<div class="style-price">GH\u20B5 ' + style.price + '</div>' +
+        '<div class="style-duration">' + style.duration + '</div>' +
+        '<div class="style-desc">' + style.desc + '</div>' +
+        (isSelected ? '<button class="btn-card-continue" onclick="event.stopPropagation(); goToStep(2)">Continue \u2192</button>' : '') +
+      '</div>' +
+    '</div>';
   }).join('');
 }
 
-function selectDate(key, display) {
-  selectedDate = key;
-  selectedDateDisplay = display;
-  renderDates();
-  checkStep2();
-}
-
-// ===== RENDER TIMES =====
-function renderTimes() {
-  const grid = document.getElementById('timeGrid');
-  grid.innerHTML = timeSlots.map(t => `
-    <div class="time-slot ${selectedTime === t ? 'selected' : ''}"
-         onclick="selectTime('${t}')">
-      ${t}
-    </div>
-  `).join('');
-}
-
-function selectTime(t) {
-  selectedTime = t;
-  renderTimes();
-  checkStep2();
-}
-
-function checkStep2() {
-  document.getElementById('btnToStep3').disabled = !(selectedDate && selectedTime);
-}
-
-// ===== NAVIGATION =====
-function goToStep(step) {
-  // Hide all panels
-  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(`step-${step}`).classList.add('active');
-
-  // Update step indicators
-  for (let i = 1; i <= 3; i++) {
-    const indicator = document.getElementById(`step-indicator-${i}`);
-    indicator.classList.remove('active', 'completed');
-    if (i < step) indicator.classList.add('completed');
-    if (i === step) indicator.classList.add('active');
-  }
-
-  // Update connectors
-  for (let i = 1; i <= 2; i++) {
-    const connector = document.getElementById(`connector-${i}`);
-    connector.classList.toggle('completed', i < step);
-  }
-
-  // If going to step 2, render dates and times
-  if (step === 2) {
-    renderDates();
-    renderTimes();
-  }
-
-  // If going to step 3, update summary
-  if (step === 3) {
-    updateSummary();
-  }
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function updateSummary() {
-  if (selectedStyle) {
-    document.getElementById('summaryStyle').textContent = selectedStyle.name;
-    document.getElementById('summaryDuration').textContent = selectedStyle.duration;
-    document.getElementById('summaryTotal').textContent = `GH₵ ${selectedStyle.price}`;
-  }
-  if (selectedDateDisplay) {
-    document.getElementById('summaryDate').textContent = selectedDateDisplay;
-  }
-  if (selectedTime) {
-    document.getElementById('summaryTime').textContent = selectedTime;
-  }
+function selectStyle(id) {
+  selectedStyle = hairstyles.find(function (s) { return s.id === id; });
+  renderStyles();
 }
 
 // ===== PHONE VALIDATION =====
 function isValidGhanaPhone(phone) {
-  const cleaned = phone.replace(/[\s\-]/g, '');
+  var cleaned = phone.replace(/[\s\-]/g, '');
   return /^(?:\+?233|0)[2-9]\d{8}$/.test(cleaned);
 }
 
 function validateDetails() {
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const phoneError = document.getElementById('phoneError');
-
-  let phoneValid = false;
+  var name = document.getElementById('customerName').value.trim();
+  var phone = document.getElementById('customerPhone').value.trim();
+  var phoneError = document.getElementById('phoneError');
+  var phoneValid = false;
 
   if (!phone) {
     phoneError.textContent = '';
@@ -192,30 +82,91 @@ function validateDetails() {
     phoneValid = true;
   }
 
-  document.getElementById('btnConfirm').disabled = !(name && phoneValid);
+  document.getElementById('btnToStep3').disabled = !(name && phoneValid);
 }
 
-// ===== CONFIRM BOOKING =====
-function confirmBooking() {
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const notes = document.getElementById('customerNotes').value.trim();
+// ===== NAVIGATION =====
+function goToStep(step) {
+  // Hide all panels
+  document.querySelectorAll('.step-panel').forEach(function (p) { p.classList.remove('active'); });
+  document.getElementById('step-' + step).classList.add('active');
 
-  // Store booking data for confirmation page
-  const booking = {
-    style: selectedStyle.name,
-    price: selectedStyle.price,
-    duration: selectedStyle.duration,
-    date: selectedDateDisplay,
-    time: selectedTime,
-    name: name,
-    phone: phone,
-    notes: notes,
-    bookingRef: 'TGB-' + Date.now().toString(36).toUpperCase(),
-  };
+  // Update step indicators (only 1-3 are visible)
+  for (var i = 1; i <= 3; i++) {
+    var indicator = document.getElementById('step-indicator-' + i);
+    indicator.classList.remove('active', 'completed');
+    if (i < step) indicator.classList.add('completed');
+    if (i === step) indicator.classList.add('active');
+  }
 
-  localStorage.setItem('girliesBraiderBooking', JSON.stringify(booking));
-  window.location.href = 'confirmation.html';
+  // Update connectors
+  for (var j = 1; j <= 2; j++) {
+    var connector = document.getElementById('connector-' + j);
+    connector.classList.toggle('completed', j < step);
+  }
+
+  // If entering step 3, load Cal.com embed with prefilled details
+  if (step === 3) {
+    loadCalEmbed();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== CAL.COM EMBED =====
+function loadCalEmbed() {
+  var name = document.getElementById('customerName').value.trim();
+  var phone = document.getElementById('customerPhone').value.trim();
+  var styleName = selectedStyle ? selectedStyle.name : '';
+
+  // Clear previous embed so it re-renders with fresh prefill data
+  document.getElementById('my-cal-inline').innerHTML = '';
+
+  Cal("inline", {
+    calLink: "frank-adu-zt1m3p",
+    elementOrSelector: "#my-cal-inline",
+    config: {
+      layout: "month_view",
+      name: name,
+      notes: "Style: " + styleName + "\nPhone: " + phone,
+    },
+  });
+}
+
+// ===== CONFIRMATION =====
+function showConfirmation() {
+  // Hide all panels, show step 4
+  document.querySelectorAll('.step-panel').forEach(function (p) { p.classList.remove('active'); });
+  document.getElementById('step-4').classList.add('active');
+
+  // Mark all 3 step indicators as completed
+  for (var i = 1; i <= 3; i++) {
+    var indicator = document.getElementById('step-indicator-' + i);
+    indicator.classList.remove('active');
+    indicator.classList.add('completed');
+  }
+  for (var j = 1; j <= 2; j++) {
+    document.getElementById('connector-' + j).classList.add('completed');
+  }
+
+  // Populate confirmation details
+  var ref = 'TGB-' + Date.now().toString(36).toUpperCase();
+  var name = document.getElementById('customerName').value.trim();
+  var phone = document.getElementById('customerPhone').value.trim();
+
+  document.getElementById('paymentRef').textContent = ref;
+  document.getElementById('detailName').textContent = name;
+  document.getElementById('detailPhone').textContent = phone;
+
+  if (selectedStyle) {
+    document.getElementById('detailStyle').textContent = selectedStyle.name;
+    document.getElementById('detailPrice').textContent = 'GH\u20B5 ' + selectedStyle.price;
+    document.getElementById('detailDuration').textContent = selectedStyle.duration;
+    var deposit = Math.round(selectedStyle.price * 0.5);
+    document.getElementById('paymentAmount').textContent = 'GH\u20B5 ' + deposit;
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===== INIT =====
