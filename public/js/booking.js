@@ -1,17 +1,17 @@
 // ===== DATA =====
 const hairstyles = [
-  { id: 1, name: 'Box Braids', price: 250, duration: '3-4 hours', desc: 'Classic individual braids, perfect for any length. A timeless protective style.', img: 'public/main.jpg' },
-  { id: 2, name: 'Knotless Braids', price: 350, duration: '4-5 hours', desc: 'Lightweight, no-knot braids that are gentle on your edges.', img: 'public/b3.jpg' },
-  { id: 3, name: 'Cornrows', price: 150, duration: '1-2 hours', desc: 'Neat, flat braids close to the scalp. Simple and elegant.', img: 'public/b2.jpg' },
-  { id: 4, name: 'Goddess Locs', price: 400, duration: '5-6 hours', desc: 'Bohemian faux locs with curly accents for a free-spirited look.', img: 'public/b3.jpg' },
-  { id: 5, name: 'Fulani Braids', price: 300, duration: '3-4 hours', desc: 'Traditional patterned braids with a centre parting and side designs.', img: 'public/b1.jpg' },
-  { id: 6, name: 'Passion Twists', price: 280, duration: '3-4 hours', desc: 'Soft, romantic two-strand twists with a natural textured finish.', img: 'public/b3.jpg' },
-  { id: 7, name: 'Feed-in Braids', price: 200, duration: '2-3 hours', desc: 'Sleek braids that start thin and gradually thicken. Great for updos.', img: 'public/b1.jpg' },
-  { id: 8, name: 'Twist Braids', price: 220, duration: '2-3 hours', desc: 'Classic two-strand twists for a clean and versatile protective style.', img: 'public/b3.jpg' },
-  { id: 9, name: 'Lemonade Braids', price: 280, duration: '3-4 hours', desc: 'Side-swept cornrows inspired by Beyonc\u00e9. Bold and iconic.', img: 'public/b2.jpg' },
-  { id: 10, name: 'Butterfly Locs', price: 350, duration: '4-5 hours', desc: 'Distressed faux locs with a looped, bohemian texture.', img: 'public/b4.jpg' },
-  { id: 11, name: 'Tribal Braids', price: 320, duration: '3-4 hours', desc: 'Bold braids with intricate patterns and creative partings.', img: 'public/b2.jpg' },
-  { id: 12, name: 'Crochet Braids', price: 180, duration: '1-2 hours', desc: 'Quick-install braids using the crochet method. Many textures available.', img: 'public/b4.jpg' },
+  { id: 1, name: 'Box Braids', price: '250 - 350', duration: '3-4 hours', desc: 'Classic individual braids, perfect for any length. A timeless protective style.', img: 'public/main.jpg' },
+  { id: 2, name: 'Knotless Braids', price: '350 - 450', duration: '4-5 hours', desc: 'Lightweight, no-knot braids that are gentle on your edges.', img: 'public/b3.jpg' },
+  { id: 3, name: 'Cornrows', price: '150 - 250', duration: '1-2 hours', desc: 'Neat, flat braids close to the scalp. Simple and elegant.', img: 'public/b2.jpg' },
+  { id: 4, name: 'Goddess Locs', price: '400 - 550', duration: '5-6 hours', desc: 'Bohemian faux locs with curly accents for a free-spirited look.', img: 'public/b3.jpg' },
+  { id: 5, name: 'Fulani Braids', price: '300 - 400', duration: '3-4 hours', desc: 'Traditional patterned braids with a centre parting and side designs.', img: 'public/b1.jpg' },
+  { id: 6, name: 'Passion Twists', price: '280 - 380', duration: '3-4 hours', desc: 'Soft, romantic two-strand twists with a natural textured finish.', img: 'public/b3.jpg' },
+  { id: 7, name: 'Feed-in Braids', price: '200 - 300', duration: '2-3 hours', desc: 'Sleek braids that start thin and gradually thicken. Great for updos.', img: 'public/b1.jpg' },
+  { id: 8, name: 'Twist Braids', price: '220 - 320', duration: '2-3 hours', desc: 'Classic two-strand twists for a clean and versatile protective style.', img: 'public/b3.jpg' },
+  { id: 9, name: 'Lemonade Braids', price: '280 - 380', duration: '3-4 hours', desc: 'Side-swept cornrows inspired by Beyonc\u00e9. Bold and iconic.', img: 'public/b2.jpg' },
+  { id: 10, name: 'Butterfly Locs', price: '350 - 450', duration: '4-5 hours', desc: 'Distressed faux locs with a looped, bohemian texture.', img: 'public/b4.jpg' },
+  { id: 11, name: 'Tribal Braids', price: '320 - 420', duration: '3-4 hours', desc: 'Bold braids with intricate patterns and creative partings.', img: 'public/b2.jpg' },
+  { id: 12, name: 'Crochet Braids', price: '180 - 250', duration: '1-2 hours', desc: 'Quick-install braids using the crochet method. Many textures available.', img: 'public/b4.jpg' },
 ];
 
 const gradients = [
