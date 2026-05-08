@@ -133,7 +133,7 @@
     </div>
   </footer>
 
-  <!-- Cal.com embed loader (load script only, don't render yet) -->
+  <!-- Cal.com embed loader -->
   <script type="text/javascript">
     (function (C, A, L) {
       let p = function (a, ar) { a.q.push(ar); };
@@ -172,104 +172,12 @@
       layout: window.innerWidth <= 768 ? "column_view" : "month_view",
     });
 
-    // When Cal.com booking completes, dismiss modal and advance to confirmation
-    Cal("on", {
-      action: "bookingSuccessful",
-      callback: function () {
-        // Find and remove Cal.com's popup modal (fixed-position overlay with iframe)
-        document.querySelectorAll("iframe").forEach(function (iframe) {
-          try {
-            if (iframe.src && iframe.src.indexOf("cal.com") !== -1) {
-              // Walk up to find the fixed overlay wrapper
-              var el = iframe;
-              while (el && el !== document.body) {
-                var style = window.getComputedStyle(el);
-                if (style.position === "fixed" && parseFloat(style.zIndex) > 999) {
-                  el.remove();
-                  return;
-                }
-                el = el.parentElement;
-              }
-            }
-          } catch (e) {}
-        });
-
-        showConfirmation();
-      },
-    });
-  </script>
-
-  <script src="public/js/main.js"></script>
-  <script src="public/js/booking.js"></script>
-</body>
-</html>
-<a href="index.html" class="btn-primary">Back to Home</a>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-bottom">
-      <span>&copy; 2026 The Girlies Braider. All rights reserved.</span>
-      <div class="social-links">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="TikTok">TK</a>
-        <a href="#" aria-label="WhatsApp">WA</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cal.com embed loader (load script only, don't render yet) -->
-  <script type="text/javascript">
-    (function (C, A, L) {
-      let p = function (a, ar) { a.q.push(ar); };
-      let d = C.document;
-      C.Cal = C.Cal || function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === "string") {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else {
-            p(cal, ar);
-          }
-          return;
-        }
-        p(cal, ar);
-      };
-    })(window, "https://app.cal.com/embed/embed.js", "init");
-
-    Cal("init", { origin: "https://cal.com" });
-
-    Cal("ui", {
-      styles: { branding: { brandColor: "#1a1a1a" } },
-      hideEventTypeDetails: false,
-      layout: window.innerWidth <= 768 ? "column_view" : "month_view",
-    });
-
-    // When Cal.com booking completes, dismiss modal and advance to confirmation
     Cal("on", {
       action: "bookingSuccessful",
       callback: function (e) {
-        // Find and remove Cal.com's popup modal (fixed-position overlay with iframe)
         document.querySelectorAll("iframe").forEach(function (iframe) {
           try {
             if (iframe.src && iframe.src.indexOf("cal.com") !== -1) {
-              // Walk up to find the fixed overlay wrapper
               var el = iframe;
               while (el && el !== document.body) {
                 var style = window.getComputedStyle(el);
@@ -282,7 +190,6 @@
             }
           } catch (e) {}
         });
-
         showConfirmation(e);
       },
     });
