@@ -17,6 +17,9 @@ const hairstyles = [
   { id: 15, name: 'Sew Ins', price: '200', duration: '3-4 hours', desc: 'Traditional sew-in installation. NB: Extensions are exclusive for this service.', img: 'public/b4.jpg' },
   { id: 16, name: 'Ponytail', price: '80 - 150', duration: '1-2 hours', desc: 'Classic sleek ponytail styled to perfection.', img: 'public/main.jpg' },
   { id: 17, name: 'Half Up Half Down', price: '150', duration: '2-3 hours', desc: 'A versatile style that is half braided/styled and half loose.', img: 'public/main.jpg' },
+  { id: 18, name: 'Revamping', price: '50', duration: '1-2 hours', desc: 'Professional cleaning and restyling to bring your old wigs back to life.', img: 'public/main.jpg' },
+  { id: 19, name: 'Frontal Installation', price: '200 - 300', duration: '2-3 hours', desc: 'Expert frontal installation for a seamless and natural-looking finish.', img: 'public/b4.jpg' },
+  { id: 20, name: 'Wig Construction', price: '200 - 250', duration: '3-5 hours', desc: 'Custom-made wigs constructed with precision to fit your head perfectly.', img: 'public/b4.jpg' },
 ];
 
 const gradients = [
