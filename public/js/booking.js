@@ -194,4 +194,13 @@ function showConfirmation(eventData) {
 }
 
 // ===== INIT =====
-renderStyles();
+function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const styleId = urlParams.get('styleId');
+  if (styleId) {
+    selectedStyle = hairstyles.find(function (s) { return s.id === parseInt(styleId); });
+  }
+  renderStyles();
+}
+
+init();
