@@ -105,12 +105,29 @@ function goToStep(step) {
     connector.classList.toggle('completed', j < step);
   }
 
-  // If entering step 3, load Cal.com embed with prefilled details
+  // If entering step 3, load Cal.com embed with prefilled details and save progress
   if (step === 3) {
+    saveBookingState();
     loadCalEmbed();
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== STATE PERSISTENCE =====
+function saveBookingState() {
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const bookingData = {
+    name: name,
+    phone: phone,
+    style: selectedStyle ? selectedStyle.name : '',
+    price: selectedStyle ? selectedStyle.price : 0,
+    duration: selectedStyle ? selectedStyle.duration : '',
+    bookingRef: 'TGB-' + Date.now().toString(36).toUpperCase(),
+    timestamp: new Date().toISOString()
+  };
+  localStorage.setItem('girliesBraiderBooking', JSON.stringify(bookingData));
 }
 
 // ===== CAL.COM EMBED =====
@@ -145,37 +162,27 @@ function loadCalEmbed() {
 }
 
 // ===== CONFIRMATION =====
-function showConfirmation() {
-  // Hide all panels, show step 4
-  document.querySelectorAll('.step-panel').forEach(function (p) { p.classList.remove('active'); });
-  document.getElementById('step-4').classList.add('active');
-
-  // Mark all 3 step indicators as completed
-  for (var i = 1; i <= 3; i++) {
-    var indicator = document.getElementById('step-indicator-' + i);
-    indicator.classList.remove('active');
-    indicator.classList.add('completed');
+function showConfirmation(eventData) {
+  // Update local storage with date/time if available from Cal.com
+  const bookingData = JSON.parse(localStorage.getItem('girliesBraiderBooking') || '{}');
+  
+  if (eventData && eventData.data) {
+    const startTime = new Date(eventData.data.startTime);
+    bookingData.date = startTime.toLocaleDateString('en-GB', { 
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+    bookingData.time = startTime.toLocaleTimeString('en-GB', { 
+      hour: '2-digit', minute: '2-digit' 
+    });
+  } else {
+    bookingData.date = 'Scheduled';
+    bookingData.time = 'Confirmed';
   }
-  for (var j = 1; j <= 2; j++) {
-    document.getElementById('connector-' + j).classList.add('completed');
-  }
+  
+  localStorage.setItem('girliesBraiderBooking', JSON.stringify(bookingData));
 
-  // Populate confirmation details
-  var ref = 'TGB-' + Date.now().toString(36).toUpperCase();
-  var name = document.getElementById('customerName').value.trim();
-  var phone = document.getElementById('customerPhone').value.trim();
-
-  document.getElementById('paymentRef').textContent = ref;
-  document.getElementById('detailName').textContent = name;
-  document.getElementById('detailPhone').textContent = phone;
-
-  if (selectedStyle) {
-    document.getElementById('detailStyle').textContent = selectedStyle.name;
-    document.getElementById('detailPrice').textContent = 'GH\u20B5 ' + selectedStyle.price;
-    document.getElementById('detailDuration').textContent = selectedStyle.duration;
-  }
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Redirect to the standalone confirmation page
+  window.location.href = 'confirmation.html';
 }
 
 // ===== INIT =====

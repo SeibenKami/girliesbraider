@@ -115,79 +115,6 @@
       </div>
     </div>
 
-    <!-- Step 4: Confirmation & Deposit (hidden from step indicators) -->
-    <div class="step-panel" id="step-4">
-      <div class="confirmation-card" style="margin: 0 auto;">
-        <div class="confirmation-icon">&#10003;</div>
-
-        <h1>Booking Received!</h1>
-        <p>Your appointment has been created. Please make a payment of <strong>GHS 50</strong> within <strong>24 hours</strong> to secure your slot.</p>
-
-        <!-- Payment Instructions -->
-        <div class="payment-box">
-          <h3>Mobile Money Deposit</h3>
-          <div class="payment-detail">
-            <span class="label">Network</span>
-            <span class="value">MTN Mobile Money</span>
-          </div>
-          <div class="payment-detail">
-            <span class="label">Number</span>
-            <span class="value">024 000 0000</span>
-          </div>
-          <div class="payment-detail">
-            <span class="label">Name</span>
-            <span class="value">The Girlies Braider</span>
-          </div>
-          <div class="payment-detail">
-            <span class="label">Reference</span>
-            <span class="value" id="paymentRef">&mdash;</span>
-          </div>
-          <div class="payment-detail highlight">
-            <span class="label">Amount to Pay</span>
-            <span class="value">GHS 50</span>
-          </div>
-        </div>
-
-        <div class="payment-warning">
-          <span class="warning-icon">&#9201;</span>
-          <span>
-            Please complete your Mobile Money deposit within <strong>24 hours</strong>.
-            Use your booking reference as the payment reference.
-            Your booking will be cancelled if payment is not received in time.
-          </span>
-        </div>
-
-        <!-- Booking Details -->
-        <div class="confirmation-details">
-          <h4>Your Booking Details</h4>
-          <div class="detail-row">
-            <span class="label">Name</span>
-            <span id="detailName">&mdash;</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Phone</span>
-            <span id="detailPhone">&mdash;</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Style</span>
-            <span id="detailStyle">&mdash;</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Price</span>
-            <span id="detailPrice">&mdash;</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Duration</span>
-            <span id="detailDuration">&mdash;</span>
-          </div>
-        </div>
-
-        <div style="margin-top: 2rem;">
-          <a href="index.html" class="btn-primary">Back to Home</a>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <!-- Footer -->
@@ -264,6 +191,95 @@
         });
 
         showConfirmation();
+      },
+    });
+  </script>
+
+  <script src="public/js/main.js"></script>
+  <script src="public/js/booking.js"></script>
+</body>
+</html>
+<a href="index.html" class="btn-primary">Back to Home</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Girlies Braider. All rights reserved.</span>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TK</a>
+        <a href="#" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cal.com embed loader (load script only, don't render yet) -->
+  <script type="text/javascript">
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    Cal("init", { origin: "https://cal.com" });
+
+    Cal("ui", {
+      styles: { branding: { brandColor: "#1a1a1a" } },
+      hideEventTypeDetails: false,
+      layout: window.innerWidth <= 768 ? "column_view" : "month_view",
+    });
+
+    // When Cal.com booking completes, dismiss modal and advance to confirmation
+    Cal("on", {
+      action: "bookingSuccessful",
+      callback: function (e) {
+        // Find and remove Cal.com's popup modal (fixed-position overlay with iframe)
+        document.querySelectorAll("iframe").forEach(function (iframe) {
+          try {
+            if (iframe.src && iframe.src.indexOf("cal.com") !== -1) {
+              // Walk up to find the fixed overlay wrapper
+              var el = iframe;
+              while (el && el !== document.body) {
+                var style = window.getComputedStyle(el);
+                if (style.position === "fixed" && parseFloat(style.zIndex) > 999) {
+                  el.remove();
+                  return;
+                }
+                el = el.parentElement;
+              }
+            }
+          } catch (e) {}
+        });
+
+        showConfirmation(e);
       },
     });
   </script>
