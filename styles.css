@@ -655,6 +655,16 @@ img {
   color: rgba(250, 246, 242, 0.4);
 }
 
+.built-by {
+  font-size: 0.78rem;
+  color: rgba(250, 246, 242, 0.35);
+  transition: color 0.3s;
+}
+
+.built-by:hover {
+  color: var(--color-accent);
+}
+
 .social-links {
   display: flex;
   gap: 1rem;
