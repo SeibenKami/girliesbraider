@@ -158,9 +158,12 @@ function saveBookingState() {
 // ===== CAL.COM EMBED =====
 function loadCalEmbed() {
   var name = document.getElementById('customerName').value.trim();
-  var phone = document.getElementById('customerPhone').value.trim();
+  var rawPhone = document.getElementById('customerPhone').value.trim().replace(/[\s\-]/g, '');
+  var phone = rawPhone.startsWith('+') ? rawPhone
+            : rawPhone.startsWith('233') ? '+' + rawPhone
+            : '+233' + rawPhone.replace(/^0/, '');
   var styleName = selectedStyle ? selectedStyle.name : '';
-  var notesText = "Style: " + styleName + "\nPhone: " + phone;
+  var notesText = "Style: " + styleName;
   var isMobile = window.innerWidth <= 768;
 
   if (isMobile) {
@@ -169,17 +172,19 @@ function loadCalEmbed() {
     btn.setAttribute('data-cal-config', JSON.stringify({
       layout: "column_view",
       name: name,
+      attendeePhoneNumber: phone,
       notes: notesText,
     }));
   } else {
     // Desktop: render inline embed
     document.getElementById('my-cal-inline').innerHTML = '';
     Cal("inline", {
-      calLink: "frank-adu-zt1m3p",
+      calLink: "girlies-braider",
       elementOrSelector: "#my-cal-inline",
       config: {
         layout: "month_view",
         name: name,
+        attendeePhoneNumber: phone,
         notes: notesText,
       },
     });
