@@ -806,12 +806,13 @@ img {
 }
 
 .style-card-image {
-  height: 200px;
+  height: 280px;
   background: linear-gradient(135deg, var(--color-bg-warm), var(--color-rose));
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .style-card-img {
