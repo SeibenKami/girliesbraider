@@ -54,7 +54,6 @@ function renderStyles() {
         '<h3>' + style.name + '</h3>' +
         '<div class="style-price">GH\u20B5 ' + style.price + '</div>' +
         '<div class="style-duration">' + style.duration + '</div>' +
-        (isSelected ? '<button class="btn-card-continue" onclick="event.stopPropagation(); goToStep(2)">Continue \u2192</button>' : '') +
       '</div>' +
     '</div>';
   }).join('');
@@ -63,6 +62,25 @@ function renderStyles() {
 function selectStyle(id) {
   selectedStyle = hairstyles.find(function (s) { return s.id === id; });
   renderStyles();
+  openStylePreview();
+}
+
+// ===== STYLE PREVIEW MODAL =====
+function openStylePreview() {
+  if (!selectedStyle) return;
+  document.getElementById('previewImg').src = selectedStyle.img;
+  document.getElementById('previewImg').alt = selectedStyle.name;
+  document.getElementById('previewName').textContent = selectedStyle.name;
+  document.getElementById('previewPrice').textContent = 'GH\u20B5 ' + selectedStyle.price;
+  document.getElementById('previewDuration').textContent = selectedStyle.duration;
+  document.getElementById('previewDesc').textContent = selectedStyle.desc;
+  document.getElementById('stylePreviewModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeStylePreview() {
+  document.getElementById('stylePreviewModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // ===== PHONE VALIDATION =====
@@ -220,6 +238,14 @@ function init() {
       selectedStyle = hairstyles.find(function (s) { return s.id === parseInt(styleId); });
     }
     renderStyles();
+    if (selectedStyle) openStylePreview();
+
+    var overlay = document.getElementById('stylePreviewModal');
+    if (overlay) {
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeStylePreview();
+      });
+    }
   }
   renderServicesPreview();
 }

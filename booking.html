@@ -133,6 +133,27 @@
     </div>
   </footer>
 
+  <!-- Style Preview Modal -->
+  <div id="stylePreviewModal" class="style-preview-overlay">
+    <div class="style-preview-modal">
+      <button class="style-preview-close" onclick="closeStylePreview()">&#x2715;</button>
+      <div class="style-preview-image">
+        <img id="previewImg" src="" alt="">
+      </div>
+      <div class="style-preview-body">
+        <h2 id="previewName"></h2>
+        <div class="style-preview-meta">
+          <span id="previewPrice" class="preview-price"></span>
+          <span id="previewDuration" class="preview-duration"></span>
+        </div>
+        <p id="previewDesc" class="preview-desc"></p>
+        <button class="btn-primary" style="width:100%; justify-content:center;" onclick="closeStylePreview(); goToStep(2);">
+          Continue &#8594;
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Cal.com embed loader -->
   <script type="text/javascript">
     (function (C, A, L) {
